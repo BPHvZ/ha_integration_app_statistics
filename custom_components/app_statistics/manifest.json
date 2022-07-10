@@ -2,7 +2,8 @@
   "domain": "app_statistics",
   "name": "App Statistics",
   "config_flow": true,
-  "documentation": "https://www.home-assistant.io/integrations/app_statistics",
+  "documentation": "https://github.com/BPHvZ/ha_integration_app_statistics#readme",
+  "issue_tracker": "https://github.com/BPHvZ/ha_integration_app_statistics/issues",
   "requirements": [
     "google-cloud-storage==2.4.0",
     "git+https://github.com/BPHvZ/appstoreconnectapi.git#appstoreconnect==0.10.0"
@@ -14,5 +15,6 @@
   "codeowners": [
     "@BPHvZ"
   ],
+  "version": "1.0.1",
   "iot_class": "cloud_polling"
 }
