@@ -4,8 +4,7 @@ import logging
 import os
 
 from google.cloud import storage
-from appstoreconnect import Api
-from loguru import logger
+from appstoreconnect_BPHvZ import Api
 
 import pandas as pd
 from .const import (
@@ -87,8 +86,8 @@ class ReportApi:
         )
 
         df = pd.read_csv(destination_file_name, sep=",", encoding="utf-16")
-        logger.debug(df.to_string())
-        df_units = df.loc[df['Package Name'] == "com.simpleappsfarm.tell_the_dj"]
+        _LOGGER.debug(df.to_string())
+        df_units = df.loc[df['Package Name'] == self.play_bundle_id]
         result[SENSOR_ANDROID_CURRENT_ACTIVE_INSTALLS] = df_units["Active Device Installs"].iloc[-1]
 
         return result
@@ -172,7 +171,7 @@ class ReportApi:
             # only download new reports
             if not os.path.isfile(file_path):
                 try:
-                    logger.debug("download report {} {}", frequency, report_date)
+                    _LOGGER.debug("download report %s %s", frequency, report_date)
                     api.download_sales_and_trends_reports(
                         filters={
                             "vendorNumber": "87483853",
@@ -182,12 +181,12 @@ class ReportApi:
                         save_to=file_path,
                     )
                 except Exception as err:
-                    logger.error(err)
+                    _LOGGER.error(err)
 
             if os.path.isfile(file_path):
                 try:
                     df = pd.read_csv(file_path, sep="\t")
-                    logger.debug(df.to_string())
+                    _LOGGER.debug(df.to_string())
 
                     # bought app install and no app updates
                     df_units = df.loc[
@@ -198,12 +197,12 @@ class ReportApi:
                             )
                         )
                     ]
-                    logger.debug("total: {}, plus: {}", result[SENSOR_IOS_TOTAL_INSTALLS], df_units["Units"].sum())
+                    _LOGGER.debug("total: %s, plus: %s", result[SENSOR_IOS_TOTAL_INSTALLS], df_units["Units"].sum())
                     result[SENSOR_IOS_TOTAL_INSTALLS] = (
                         result[SENSOR_IOS_TOTAL_INSTALLS] + df_units["Units"].sum()
                     )
                 except Exception as err:
-                    logger.error(err)
+                    _LOGGER.error(err)
 
         return result
 
@@ -214,19 +213,10 @@ class ReportApi:
             self.get_report_from_bucket
         )
         result.update(android_data)
-        logger.debug(android_data)
+        _LOGGER.debug(android_data)
         ios_data = await self.hass.async_add_executor_job(
             self.get_report_from_app_store_connect
         )
         result.update(ios_data)
-        logger.debug(ios_data)
+        _LOGGER.debug(ios_data)
         return result
-
-
-# gs://pubsite_prod_rev_08738877465993553437/stats/installs/installs_com.simpleappsfarm.tell_the_dj_202207_app_version.csv
-# gs://pubsite_prod_rev_08738877465993553437/stats/installs/installs_com.simpleappsfarm.tell_the_dj_202207_carrier.csv
-# gs://pubsite_prod_rev_08738877465993553437/stats/installs/installs_com.simpleappsfarm.tell_the_dj_202207_country.csv
-# gs://pubsite_prod_rev_08738877465993553437/stats/installs/installs_com.simpleappsfarm.tell_the_dj_202207_device.csv
-# gs://pubsite_prod_rev_08738877465993553437/stats/installs/installs_com.simpleappsfarm.tell_the_dj_202207_language.csv
-# gs://pubsite_prod_rev_08738877465993553437/stats/installs/installs_com.simpleappsfarm.tell_the_dj_202207_os_version.csv
-# gs://pubsite_prod_rev_08738877465993553437/stats/installs/installs_com.simpleappsfarm.tell_the_dj_202207_overview.csv
