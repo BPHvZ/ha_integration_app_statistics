@@ -6,7 +6,7 @@
   "issue_tracker": "https://github.com/BPHvZ/ha_integration_app_statistics/issues",
   "requirements": [
     "google-cloud-storage==2.4.0",
-    "git+https://github.com/BPHvZ/appstoreconnectapi.git#appstoreconnect==0.10.0"
+    "appstoreconnect-BPHvZ==0.10.1"
   ],
   "ssdp": [],
   "zeroconf": [],
