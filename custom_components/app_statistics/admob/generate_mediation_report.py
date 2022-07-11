@@ -14,10 +14,9 @@
 # limitations under the License.
 
 from datetime import date
-import json
 from googleapiclient.discovery import Resource
 
-from homeassistant.components.app_statistics.admob.admob_utils import authenticate
+from admob_utils import authenticate
 
 # Set the 'PUBLISHER_ID' which follows the format "pub-XXXXXXXXXXXXXXXX".
 # See https://support.google.com/admob/answer/2784578
