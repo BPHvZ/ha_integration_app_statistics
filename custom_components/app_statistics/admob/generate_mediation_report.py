@@ -14,9 +14,8 @@
 # limitations under the License.
 
 from datetime import date
+from .admob_utils import AdMobAuthentication
 from googleapiclient.discovery import Resource
-
-from admob_utils import authenticate
 
 # Set the 'PUBLISHER_ID' which follows the format "pub-XXXXXXXXXXXXXXXX".
 # See https://support.google.com/admob/answer/2784578
@@ -96,5 +95,5 @@ def get_mediation_report(
     client_secrets_path: str, publisher_id: str, start_date: date, end_date: date
 ) -> list[dict]:
     """create Admob API client and get mediation report."""
-    service = authenticate(client_secrets_path)
+    service = AdMobAuthentication.authenticate(client_secrets_path)
     return generate_mediation_report(service, publisher_id, start_date, end_date)
