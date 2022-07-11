@@ -269,6 +269,7 @@ class ReportApi:
 
         try:
             report = get_mediation_report(
+                self.hass,
                 self.admob_client_path,
                 self.admob_publisher_id,
                 start_of_month,

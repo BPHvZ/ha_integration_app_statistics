@@ -23,9 +23,11 @@ import pickle
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build, Resource
+from homeassistant.core import HomeAssistant
+from homeassistant.const import SERVER_PORT
 
-PORT = 8123
-REDIRECT_URI = f"http://127.0.0.1:{PORT}"
+# PORT = 8123
+# REDIRECT_URI = f"http://127.0.0.1:{PORT}"
 
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and client_secret.
@@ -50,13 +52,14 @@ TOKEN_FILE = 'app_statistics/token.pickle'
 
 # Authenticate user and create AdMob Service Object.
 
-def authenticate(client_secrets_path: str) -> Resource:
+def authenticate(hass: HomeAssistant, client_secrets_path: str) -> Resource:
     """Authenticates a user and creates an AdMob Service Object.
 
     Returns:
         An AdMob Service Object that is authenticated with the user using either
         a client_secrets file or previously stored access and refresh tokens.
     """
+    redirect_uri = hass.config.external_url
 
     # The TOKEN_FILE stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -74,7 +77,7 @@ def authenticate(client_secrets_path: str) -> Resource:
         flow = Flow.from_client_secrets_file(
             client_secrets_path, scopes=[API_SCOPE])
 
-        flow.redirect_uri = REDIRECT_URI
+        flow.redirect_uri = redirect_uri
 
         # Create an anti-forgery state token as described here:
         # https://developers.google.com/identity/protocols/OpenIDConnect#createxsrftoken
@@ -93,7 +96,7 @@ def authenticate(client_secrets_path: str) -> Resource:
         print("Paste this URL into your browser: ")
         print(authorization_url)
         print(
-            f"\nWaiting for authorization and callback to: {REDIRECT_URI}...")
+            f"\nWaiting for authorization and callback to: {redirect_uri}...")
 
         # Retrieves an authorization code by opening a socket to receive the
         # redirect request and parsing the query parameters set in the URL.
@@ -126,7 +129,7 @@ def _get_authorization_code(passthrough_val):
         """
     # Open a socket at localhost:PORT and listen for a request
     sock = socket.socket()
-    sock.bind(("localhost", PORT))
+    sock.bind(("localhost", SERVER_PORT))
     sock.listen(1)
     connection, address = sock.accept()
     data = connection.recv(1024)

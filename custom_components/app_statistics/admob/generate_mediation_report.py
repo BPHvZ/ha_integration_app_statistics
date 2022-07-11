@@ -16,6 +16,7 @@
 from datetime import date
 from .admob_utils import authenticate
 from googleapiclient.discovery import Resource
+from homeassistant.core import HomeAssistant
 
 # Set the 'PUBLISHER_ID' which follows the format "pub-XXXXXXXXXXXXXXXX".
 # See https://support.google.com/admob/answer/2784578
@@ -91,9 +92,9 @@ def generate_mediation_report(
     return response
 
 
-def get_mediation_report(
+def get_mediation_report(hass: HomeAssistant,
     client_secrets_path: str, publisher_id: str, start_date: date, end_date: date
 ) -> list[dict]:
     """create Admob API client and get mediation report."""
-    service = authenticate(client_secrets_path=client_secrets_path)
+    service = authenticate(hass=hass, client_secrets_path=client_secrets_path)
     return generate_mediation_report(service, publisher_id, start_date, end_date)
