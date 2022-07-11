@@ -19,6 +19,7 @@ import re
 import socket
 import sys
 import pickle
+import logging
 
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import Flow
@@ -51,6 +52,8 @@ TOKEN_FILE = 'app_statistics/token.pickle'
 #   return client_secrets
 
 # Authenticate user and create AdMob Service Object.
+
+_LOGGER = logging.getLogger(__name__)
 
 
 def authenticate(hass: HomeAssistant, client_secrets_path: str) -> Resource:
@@ -94,10 +97,11 @@ def authenticate(hass: HomeAssistant, client_secrets_path: str) -> Resource:
         # typical web application you would redirect the user to this URL, and they
         # would be redirected back to "redirect_url" provided earlier after
         # granting permission.
-        print("Paste this URL into your browser: ")
-        print(authorization_url)
-        print(
-            f"\nWaiting for authorization and callback to: {redirect_uri}...")
+        _LOGGER.info("Paste this URL into your browser: %s", authorization_url)
+        # print("Paste this URL into your browser: %s")
+        # print(authorization_url)
+        # print(
+        #     f"\nWaiting for authorization and callback to: {redirect_uri}...")
 
         # Retrieves an authorization code by opening a socket to receive the
         # redirect request and parsing the query parameters set in the URL.
@@ -153,6 +157,7 @@ def _get_authorization_code(passthrough_val):
             message = "Authorization code was successfully retrieved."
     except ValueError as error:
         print(error)
+        _LOGGER.exception("Paste this URL into your browser: %s", authorization_url)
         sys.exit(1)
     finally:
         response = ("HTTP/1.1 200 OK\n"
