@@ -52,6 +52,7 @@ TOKEN_FILE = 'app_statistics/token.pickle'
 
 # Authenticate user and create AdMob Service Object.
 
+
 def authenticate(hass: HomeAssistant, client_secrets_path: str) -> Resource:
     """Authenticates a user and creates an AdMob Service Object.
 
@@ -117,6 +118,7 @@ def authenticate(hass: HomeAssistant, client_secrets_path: str) -> Resource:
     admob = build(API_NAME, API_VERSION, credentials=credentials)
     return admob
 
+
 def _get_authorization_code(passthrough_val):
     """Opens a socket to handle a single HTTP request containing auth tokens.
 
@@ -130,7 +132,7 @@ def _get_authorization_code(passthrough_val):
     # Open a socket at localhost:PORT and listen for a request
     sock = socket.socket()
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock.bind((socket.gethostbyname(socket.gethostname()), 65432))
+    sock.bind(("localhost", 65432))
     sock.listen(1)
     connection, address = sock.accept()
     data = connection.recv(1024)
@@ -162,6 +164,7 @@ def _get_authorization_code(passthrough_val):
         connection.close()
 
     return params.get("code")
+
 
 def _parse_raw_query_params(data):
     """Parses a raw HTTP request to extract its query params as a dict.
