@@ -95,5 +95,5 @@ def get_mediation_report(
     client_secrets_path: str, publisher_id: str, start_date: date, end_date: date
 ) -> list[dict]:
     """create Admob API client and get mediation report."""
-    service = AdMobAuthentication.authenticate(client_secrets_path)
+    service = AdMobAuthentication.authenticate(client_secrets_path=client_secrets_path)
     return generate_mediation_report(service, publisher_id, start_date, end_date)
