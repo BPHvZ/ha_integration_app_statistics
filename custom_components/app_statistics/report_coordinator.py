@@ -49,7 +49,7 @@ class ReportCoordinator(DataUpdateCoordinator):
             update_interval=timedelta(hours=1),
         )
 
-    async def _async_update_data(self) -> dict[str, Any]:
+    async def _async_update_data(self) -> dict:
         """Fetch data from API endpoint.
 
         This is the place to pre-process the data to lookup tables
