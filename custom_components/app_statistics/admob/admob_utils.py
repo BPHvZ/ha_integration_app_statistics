@@ -132,7 +132,7 @@ def _get_authorization_code(passthrough_val):
     # Open a socket at localhost:PORT and listen for a request
     sock = socket.socket()
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock.bind(("localhost", 8080))
+    sock.bind(("localhost", 8123))
     sock.listen(1)
     connection, address = sock.accept()
     data = connection.recv(1024)
