@@ -7,6 +7,8 @@ from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 
 from .const import (
+    CONF_ADMOB_CLIENT_PATH,
+    CONF_ADMOB_PUBLISHER_ID,
     CONF_BUCKET_NAME,
     CONF_IOS_BUNDLE_ID,
     CONF_IOS_CONNECT_ISSUER_ID,
@@ -32,6 +34,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         ios_key_id=entry.data[CONF_IOS_CONNECT_KEY_ID],
         ios_key_path=entry.data[CONF_IOS_CONNECT_KEY_PATH],
         ios_issuer_id=entry.data[CONF_IOS_CONNECT_ISSUER_ID],
+        admob_client_path=entry.data[CONF_ADMOB_CLIENT_PATH],
+        admob_publisher_id=entry.data[CONF_ADMOB_PUBLISHER_ID],
     )
     await coordinator.async_config_entry_first_refresh()
 

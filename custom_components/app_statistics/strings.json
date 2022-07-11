@@ -12,7 +12,9 @@
           "ios_connect_key_path": "[iOS] App Store Connect key path",
           "ios_key_id": "[iOS] App Store Connect key ID",
           "ios_bundle_id": "[iOS] App bundle ID",
-          "ios_connect_issuer_id": "[iOS] App Store Connect Issuer ID"
+          "ios_connect_issuer_id": "[iOS] App Store Connect Issuer ID",
+          "admob_client_path": "[AdMob] client secret path",
+          "admob_publisher_id": "[AdMob] publisher ID"
         }
       }
     },

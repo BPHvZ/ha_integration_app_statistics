@@ -3,18 +3,20 @@ from __future__ import annotations
 import logging
 from typing import cast
 
-from homeassistant.const import CONF_NAME
+from homeassistant.const import CONF_NAME, CURRENCY_EURO
 from homeassistant.helpers.typing import StateType
 
 from .const import (
     CONF_IOS_BUNDLE_ID,
     DOMAIN,
+    SENSOR_ADMOB_REVENUE_MONTH,
+    SENSOR_ADMOB_REVENUE_TODAY,
     SENSOR_ANDROID_CURRENT_ACTIVE_INSTALLS,
     SENSOR_IOS_TOTAL_INSTALLS,
 )
 from .report_coordinator import ReportCoordinator
 
-from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
+from homeassistant.components.sensor import SensorEntity, SensorEntityDescription, SensorStateClass
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -26,11 +28,28 @@ _LOGGER = logging.getLogger(__name__)
 
 SENSOR_TYPES: tuple[SensorEntityDescription, ...] = (
     SensorEntityDescription(
-        key=SENSOR_IOS_TOTAL_INSTALLS, name="iOS total app installs"
+        key=SENSOR_IOS_TOTAL_INSTALLS,
+        name="iOS total app installs",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement="total installs"
     ),
     SensorEntityDescription(
         key=SENSOR_ANDROID_CURRENT_ACTIVE_INSTALLS,
         name="Android current active installs",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement="active installs"
+    ),
+    SensorEntityDescription(
+        key=SENSOR_ADMOB_REVENUE_TODAY,
+        name="AdMob estimated revenue today",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=CURRENCY_EURO
+    ),
+    SensorEntityDescription(
+        key=SENSOR_ADMOB_REVENUE_MONTH,
+        name="AdMob estimated revenue this month",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=CURRENCY_EURO
     ),
 )
 

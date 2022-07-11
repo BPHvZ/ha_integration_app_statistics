@@ -25,6 +25,8 @@ class ReportCoordinator(DataUpdateCoordinator):
         ios_key_id: str,
         ios_key_path: str,
         ios_issuer_id: str,
+        admob_client_path: str,
+        admob_publisher_id: str,
     ) -> None:
         """Initialize my coordinator."""
         self.api = ReportApi(
@@ -36,6 +38,8 @@ class ReportCoordinator(DataUpdateCoordinator):
             ios_key_id=ios_key_id,
             ios_key_path=ios_key_path,
             ios_issuer_id=ios_issuer_id,
+            admob_client_path=admob_client_path,
+            admob_publisher_id=admob_publisher_id,
         )
 
         super().__init__(

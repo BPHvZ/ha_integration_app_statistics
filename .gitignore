@@ -1,3 +1,5 @@
 custom_components/app_statistics/__pycache__/
 
 .DS_Store
+
+custom_components/app_statistics/admob/__pycache__/

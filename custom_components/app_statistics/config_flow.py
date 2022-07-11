@@ -13,6 +13,8 @@ from homeassistant.exceptions import HomeAssistantError
 import homeassistant.helpers.config_validation as cv
 
 from .const import (
+    CONF_ADMOB_CLIENT_PATH,
+    CONF_ADMOB_PUBLISHER_ID,
     CONF_BUCKET_NAME,
     CONF_IOS_BUNDLE_ID,
     CONF_IOS_CONNECT_ISSUER_ID,
@@ -34,14 +36,18 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
         vol.Required(CONF_IOS_CONNECT_KEY_ID): cv.string,
         vol.Required(CONF_IOS_CONNECT_KEY_PATH): cv.string,
         vol.Required(CONF_IOS_CONNECT_ISSUER_ID): cv.string,
+        vol.Required(CONF_ADMOB_CLIENT_PATH): cv.string,
+        vol.Required(CONF_ADMOB_PUBLISHER_ID): cv.string,
     }
 )
 
-async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str, Any]:
+async def validate_input(hass: HomeAssistant, data: dict[str, str]) -> dict[str, str]:
     """Validate the user input allows us to connect.
 
     Data has the keys from STEP_USER_DATA_SCHEMA with values provided by the user.
     """
+    for k, _v in data.items():
+        data[k] = _v.strip()
 
     cv.isfile(data[CONF_PLAY_SERVICE_ACCOUNT_PATH])
     cv.isfile(data[CONF_IOS_CONNECT_KEY_PATH])

@@ -11,6 +11,8 @@
         "step": {
             "user": {
                 "data": {
+                    "admob_client_path": "[AdMob] client secret path",
+                    "admob_publisher_id": "[AdMob] publisher ID",
                     "host": "Host",
                     "ios_bundle_id": "[iOS] App bundle ID",
                     "ios_connect_issuer_id": "[iOS] App Store Connect Issuer ID",
