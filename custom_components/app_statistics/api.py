@@ -105,7 +105,7 @@ class ReportApi:
 
         return result
 
-    def ios_reporting_dates(self, start_date: date) -> list:
+    def ios_reporting_dates(self, start_date: date) -> 'list[dict[str, str]]':
         """Get all reporting dates between a starting date and today."""
         result = []
         today = date.today()
@@ -167,7 +167,7 @@ class ReportApi:
         _LOGGER.debug(result)
         return result
 
-    def get_report_from_app_store_connect(self) -> dict:
+    def get_report_from_app_store_connect(self) -> 'dict[str, int]':
         """Download sales report from app store connect."""
         result = {
             SENSOR_IOS_TOTAL_INSTALLS: 0,
@@ -235,7 +235,7 @@ class ReportApi:
 
         return result
 
-    def clean_mediation_report(self, report: list) -> dict:
+    def clean_mediation_report(self, report: 'list[dict]') -> dict:
         """remove headers and sort earnings"""
         clean = {"DATE": [], "ESTIMATED_EARNINGS": []}
         del report[0]
@@ -282,7 +282,7 @@ class ReportApi:
 
         return result
 
-    async def update_data(self) -> dict:
+    async def update_data(self) -> 'dict[str, Any]':
         """Download reports from Google Play and App Store Connect."""
         result = {}
 

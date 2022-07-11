@@ -13,16 +13,13 @@
                 "data": {
                     "admob_client_path": "[AdMob] client secret path",
                     "admob_publisher_id": "[AdMob] publisher ID",
-                    "host": "Host",
                     "ios_bundle_id": "[iOS] App bundle ID",
                     "ios_connect_issuer_id": "[iOS] App Store Connect Issuer ID",
                     "ios_connect_key_path": "[iOS] App Store Connect key path",
                     "ios_key_id": "[iOS] App Store Connect key ID",
-                    "password": "Password",
                     "play_bucket_name": "[Android] Play reports bucket name",
                     "play_bundle_id": "[Android] App bundle ID",
-                    "play_service_account_path": "[Android] Play service account path",
-                    "username": "Username"
+                    "play_service_account_path": "[Android] Play service account path"
                 }
             }
         }

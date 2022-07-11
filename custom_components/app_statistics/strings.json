@@ -3,9 +3,6 @@
     "step": {
       "user": {
         "data": {
-          "host": "[%key:common::config_flow::data::host%]",
-          "username": "[%key:common::config_flow::data::username%]",
-          "password": "[%key:common::config_flow::data::password%]",
           "play_service_account_path": "[Android] Play service account path",
           "play_bundle_id": "[Android] App bundle ID",
           "play_bucket_name": "[Android] Play reports bucket name",
