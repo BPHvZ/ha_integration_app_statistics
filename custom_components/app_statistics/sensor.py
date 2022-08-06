@@ -6,7 +6,7 @@ from typing import cast
 from homeassistant.const import CONF_NAME, CURRENCY_EURO
 from homeassistant.helpers.typing import StateType
 
-from .const import (
+from homeassistant.components.app_statistics.const import (
     CONF_IOS_BUNDLE_ID,
     DOMAIN,
     SENSOR_ADMOB_REVENUE_MONTH,
@@ -14,9 +14,13 @@ from .const import (
     SENSOR_ANDROID_CURRENT_ACTIVE_INSTALLS,
     SENSOR_IOS_TOTAL_INSTALLS,
 )
-from .report_coordinator import ReportCoordinator
+from homeassistant.components.app_statistics.report_coordinator import ReportCoordinator
 
-from homeassistant.components.sensor import SensorEntity, SensorEntityDescription, SensorStateClass
+from homeassistant.components.sensor import (
+    SensorEntity,
+    SensorEntityDescription,
+    SensorStateClass,
+)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -31,25 +35,25 @@ SENSOR_TYPES: tuple[SensorEntityDescription, ...] = (
         key=SENSOR_IOS_TOTAL_INSTALLS,
         name="iOS total app installs",
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement="total installs"
+        native_unit_of_measurement="total installs",
     ),
     SensorEntityDescription(
         key=SENSOR_ANDROID_CURRENT_ACTIVE_INSTALLS,
         name="Android current active installs",
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement="active installs"
+        native_unit_of_measurement="active installs",
     ),
     SensorEntityDescription(
         key=SENSOR_ADMOB_REVENUE_TODAY,
         name="AdMob estimated revenue today",
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement=CURRENCY_EURO
+        native_unit_of_measurement=CURRENCY_EURO,
     ),
     SensorEntityDescription(
         key=SENSOR_ADMOB_REVENUE_MONTH,
         name="AdMob estimated revenue this month",
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement=CURRENCY_EURO
+        native_unit_of_measurement=CURRENCY_EURO,
     ),
 )
 
@@ -58,25 +62,24 @@ async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
     """Add App Statistics entities from a config_entry."""
-    config = entry.data
-
-    app_bundle_id = config.get(CONF_IOS_BUNDLE_ID)
+    reports_config = entry.data["reports"]
+    ios_app_bundle_id = reports_config.get(CONF_IOS_BUNDLE_ID)
 
     coordinator: ReportCoordinator = hass.data[DOMAIN][entry.entry_id]
 
-    if app_bundle_id is None:
-        _LOGGER.error("App bundle ID is not set in Home Assistant config")
+    if ios_app_bundle_id is None:
+        _LOGGER.error("iOS App bundle ID is not set in Home Assistant config")
         return
 
     _LOGGER.debug(
         "Initializing app statistics sensor app bundle ID %s",
-        app_bundle_id,
+        ios_app_bundle_id,
     )
 
     entities = [
         AppStatisticsSensor(
-            config.get(CONF_NAME, "App Statistics"),
-            app_bundle_id,
+            reports_config.get(CONF_NAME, "App Statistics"),
+            ios_app_bundle_id,
             description,
             coordinator,
         )

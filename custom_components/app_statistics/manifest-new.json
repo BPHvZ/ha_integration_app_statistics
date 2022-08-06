@@ -21,6 +21,5 @@
   "codeowners": [
     "@BPHvZ"
   ],
-  "version": "1.0.3",
   "iot_class": "cloud_polling"
 }

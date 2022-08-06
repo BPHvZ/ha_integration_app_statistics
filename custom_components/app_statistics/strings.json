@@ -1,6 +1,13 @@
 {
   "config": {
     "step": {
+      "pick_implementation": {
+        "title": "[%key:common::config_flow::title::oauth2_pick_implementation%]"
+      },
+      "reauth_confirm": {
+        "title": "[%key:common::config_flow::title::reauth%]",
+        "description": "The App Statistics integration needs to re-authenticate with Admob for account: {account}"
+      },
       "user": {
         "data": {
           "play_service_account_path": "[Android] Play service account path",
@@ -10,18 +17,23 @@
           "ios_key_id": "[iOS] App Store Connect key ID",
           "ios_bundle_id": "[iOS] App bundle ID",
           "ios_connect_issuer_id": "[iOS] App Store Connect Issuer ID",
-          "admob_client_path": "[AdMob] client secret path",
+          "admob_client_id": "[AdMob] client id",
+          "admob_client_secret": "[AdMob] client secret",
           "admob_publisher_id": "[AdMob] publisher ID"
+        }
+      },
+      "google_auth": {
+        "data": {
+          "google_auth_access_token": "Access token"
         }
       }
     },
-    "error": {
-      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
-      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
-      "unknown": "[%key:common::config_flow::error::unknown%]"
-    },
     "abort": {
-      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
-    }
+      "authorize_url_timeout": "Timeout generating authorize URL.",
+      "missing_configuration": "The App Statistics integration is not configured. Please follow the documentation.",
+      "no_url_available": "[%key:common::config_flow::abort::oauth2_no_url_available%]",
+      "reauth_account_mismatch": "The App Statistics Admob account authenticated with, does not match the account needed re-authentication."
+    },
+    "create_entry": { "default": "Successfully authenticated with Admob." }
   }
 }

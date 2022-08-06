@@ -1,17 +1,31 @@
 {
     "config": {
         "abort": {
-            "already_configured": "Device is already configured"
+            "authorize_url_timeout": "Timeout generating authorize URL.",
+            "missing_configuration": "The App Statistics integration is not configured. Please follow the documentation.",
+            "no_url_available": "No URL available. For information about this error, [check the help section]({docs_url})",
+            "reauth_account_mismatch": "The App Statistics Admob account authenticated with, does not match the account needed re-authentication."
         },
-        "error": {
-            "cannot_connect": "Failed to connect",
-            "invalid_auth": "Invalid authentication",
-            "unknown": "Unexpected error"
+        "create_entry": {
+            "default": "Successfully authenticated with Admob."
         },
         "step": {
+            "google_auth": {
+                "data": {
+                    "google_auth_access_token": "Access token"
+                }
+            },
+            "pick_implementation": {
+                "title": "Pick Authentication Method"
+            },
+            "reauth_confirm": {
+                "description": "The App Statistics integration needs to re-authenticate with Admob for account: {account}",
+                "title": "Reauthenticate Integration"
+            },
             "user": {
                 "data": {
-                    "admob_client_path": "[AdMob] client secret path",
+                    "admob_client_id": "[AdMob] client id",
+                    "admob_client_secret": "[AdMob] client secret",
                     "admob_publisher_id": "[AdMob] publisher ID",
                     "ios_bundle_id": "[iOS] App bundle ID",
                     "ios_connect_issuer_id": "[iOS] App Store Connect Issuer ID",

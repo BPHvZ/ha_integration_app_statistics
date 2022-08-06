@@ -9,8 +9,11 @@ CONF_IOS_BUNDLE_ID = "ios_bundle_id"
 CONF_IOS_CONNECT_KEY_ID = "ios_key_id"
 CONF_IOS_CONNECT_KEY_PATH = "ios_connect_key_path"
 CONF_IOS_CONNECT_ISSUER_ID = "ios_connect_issuer_id"
-CONF_ADMOB_CLIENT_PATH = "admob_client_path"
+CONF_ADMOB_CLIENT_ID = "admob_client_id"
+CONF_ADMOB_CLIENT_SECRET = "admob_client_secret"
 CONF_ADMOB_PUBLISHER_ID = "admob_publisher_id"
+
+CONF_GOOGLE_ACCESS_TOKEN = "google_auth_access_token"
 
 SENSOR_IOS_TOTAL_INSTALLS = "ios_app_install_total"
 SENSOR_ANDROID_CURRENT_ACTIVE_INSTALLS = "android_app_current_active_installs"
