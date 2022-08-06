@@ -6,7 +6,7 @@ from typing import cast
 from homeassistant.const import CONF_NAME, CURRENCY_EURO
 from homeassistant.helpers.typing import StateType
 
-from homeassistant.components.app_statistics.const import (
+from .const import (
     CONF_IOS_BUNDLE_ID,
     DOMAIN,
     SENSOR_ADMOB_REVENUE_MONTH,
@@ -14,7 +14,7 @@ from homeassistant.components.app_statistics.const import (
     SENSOR_ANDROID_CURRENT_ACTIVE_INSTALLS,
     SENSOR_IOS_TOTAL_INSTALLS,
 )
-from homeassistant.components.app_statistics.report_coordinator import ReportCoordinator
+from .report_coordinator import ReportCoordinator
 
 from homeassistant.components.sensor import (
     SensorEntity,

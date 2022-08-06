@@ -16,7 +16,7 @@ from googleapiclient.discovery import build
 import google.oauth2.credentials as gCredentials
 
 
-from homeassistant.components.app_statistics.const import (
+from .const import (
     CONF_ADMOB_CLIENT_ID,
     CONF_ADMOB_PUBLISHER_ID,
     CONF_ADMOB_CLIENT_SECRET,

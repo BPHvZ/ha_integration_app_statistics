@@ -6,8 +6,8 @@ from typing import Any
 import google.oauth2.credentials
 
 
-from homeassistant.components.app_statistics.api import ReportApi
-from homeassistant.components.app_statistics.const import DOMAIN
+from .api import ReportApi
+from .const import DOMAIN
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 

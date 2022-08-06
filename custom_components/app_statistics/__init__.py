@@ -6,7 +6,7 @@ from typing import Any
 import google.oauth2.credentials
 
 import aiohttp
-from homeassistant.components.app_statistics.report_coordinator import ReportCoordinator
+from .report_coordinator import ReportCoordinator
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import json
 
@@ -16,7 +16,7 @@ from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 
 
-from homeassistant.components.app_statistics.const import (
+from .const import (
     CONF_ADMOB_CLIENT_ID,
     CONF_ADMOB_CLIENT_SECRET,
     CONF_ADMOB_PUBLISHER_ID,

@@ -14,14 +14,14 @@ from google.cloud import storage
 from appstoreconnect_BPHvZ import Api
 
 import pandas as pd
-from homeassistant.components.app_statistics.admob.generate_mediation_report import (
+from .admob.generate_mediation_report import (
     get_mediation_report,
 )
 
 from homeassistant.core import HomeAssistant
 
 
-from homeassistant.components.app_statistics.const import (
+from .const import (
     SENSOR_ADMOB_REVENUE_MONTH,
     SENSOR_ADMOB_REVENUE_TODAY,
     SENSOR_ANDROID_CURRENT_ACTIVE_INSTALLS,
