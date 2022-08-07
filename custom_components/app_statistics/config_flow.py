@@ -119,11 +119,14 @@ class AppStatisticsFlowHandler(
         """Create an entry for App Statistics."""
         self.logger.debug(msg=data)
 
+        scopes_str: str = data["token"]["scope"]
+        scopes_list: list[str] = scopes_str.split(" ")
+
         credentials = gCredentials.Credentials(
             data["token"]["access_token"],
             refresh_token=data["token"]["refresh_token"],
             token_uri="https://oauth2.googleapis.com/token",
-            scopes=data["token"]["scope"],
+            scopes=scopes_list,
             client_id=self.reports_input[CONF_ADMOB_CLIENT_ID],
             client_secret=self.reports_input[CONF_ADMOB_CLIENT_SECRET],
             enable_reauth_refresh=True,
